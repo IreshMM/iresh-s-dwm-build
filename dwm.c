@@ -234,6 +234,7 @@ static int xerror(Display *dpy, XErrorEvent *ee);
 static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void zoom(const Arg *arg);
+static void togglemon(const Arg *arg);
 
 /* variables */
 static const char broken[] = "broken";
@@ -2126,6 +2127,19 @@ zoom(const Arg *arg)
 			return;
 	pop(c);
 }
+
+void
+togglemon(const Arg *arg) 
+{
+    Arg iarg = {.i = -1};
+    tagmon(&iarg);
+    focusmon(&iarg);
+    focusstack(&iarg);
+    iarg.i = 1;
+    tagmon(&iarg);
+    focusmon(&iarg);
+}
+
 
 int
 main(int argc, char *argv[])
